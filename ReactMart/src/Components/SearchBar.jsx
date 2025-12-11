@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+  let timerId = useRef(null);
 
   async function getApiData() {
     if (searchQuery.trim().length == 0) return;
@@ -17,7 +19,12 @@ const SearchBar = () => {
   }
 
   useEffect(() => {
-    getApiData();
+    if (timerId.current) {
+      clearTimeout(timerId.current);
+    }
+    timerId.current = setTimeout(() => {
+      getApiData();
+    }, 500);
   }, [searchQuery]);
 
   return (
