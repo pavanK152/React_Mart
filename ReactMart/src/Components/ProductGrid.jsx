@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setScreenProducts } from "../ProductSlice";
+import ProductCard from "./ProductCard";
 
 const ProductGrid = () => {
   const dispatch = useDispatch();
 
-  // FIX 1: renamed variable so it does NOT shadow the action
   const screenProducts = useSelector((state) => state.product.screenProducts);
 
   async function getData() {
@@ -18,9 +18,26 @@ const ProductGrid = () => {
     getData();
   }, []);
 
-  console.log("Products:", screenProducts);
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <h2 className="text-xl font-semibold mb-4">Products</h2>
 
-  return <div>Product Grid Loaded</div>;
+      <div
+        className="
+          grid 
+          grid-cols-2 
+          sm:grid-cols-3 
+          md:grid-cols-4 
+          lg:grid-cols-5
+          gap-6
+        "
+      >
+        {screenProducts.map((productData) => (
+          <ProductCard key={productData.id} productData={productData} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default ProductGrid;
