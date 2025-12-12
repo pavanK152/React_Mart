@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 import CartIcon from "../Icons/CartIcon";
+import { Link } from "react-router";
 
 const Navbar = () => {
   return (
@@ -17,12 +18,12 @@ const Navbar = () => {
 
         {/* right icons */}
         <div className="flex items-center gap-6">
-          <div className="relative cursor-pointer">
+          <Link to="/cart" className="relative cursor-pointer">
             <CartIcon />
             <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs px-1.5 py-[1px] rounded-full">
               3
             </span>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

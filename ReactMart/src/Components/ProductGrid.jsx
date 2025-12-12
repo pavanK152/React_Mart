@@ -9,6 +9,7 @@ const ProductGrid = () => {
   const screenProducts = useSelector((state) => state.product.screenProducts);
 
   async function getData() {
+    if (screenProducts.length > 0) return;
     let apiData = await fetch(`https://dummyjson.com/products`);
     let jsonData = await apiData.json();
     dispatch(setScreenProducts(jsonData.products));
